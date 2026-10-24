@@ -3,3 +3,4 @@ work/
 *.log
 out*/
 .DS_Store
+artifacts/*.img
