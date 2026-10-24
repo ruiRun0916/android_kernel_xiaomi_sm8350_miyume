@@ -4,6 +4,26 @@
 
 基于 HoshinoNeko **Stable4**（`d5dae54`，Linux 5.4.302）重编，只叠加容器所需开关。
 
+### 支持设备
+
+上游源码覆盖四台骁龙 888 机型，本 Release 提供 **star** 的成品：
+
+| 设备 | 代号 | 译名 | defconfig | 本 Release |
+|---|---|---|---|---|
+| 小米 11 Ultra | `star` | 星级 | `star_defconfig` | 已提供 |
+| 小米 11 Pro | `mars` | 三月 | `star_defconfig` | 需自行编译 |
+| 小米 11 | `venus` | 金星 | `venus_defconfig` | 需自行编译 |
+| Redmi K40 Pro / Pro+ | `haydn` | — | `haydn_defconfig` | 需自行编译 |
+
+其他机型不可直接刷本包（ramdisk、DTB、vendor 模块与 vermagic 机型标识均不同），请按仓库 `docs/BUILD.md` 用对应 defconfig 重编。
+
+### 附件
+
+| 文件 | 大小 | 用途 |
+|---|---|---|
+| `AK3-Star-Stable4-Droidspaces-v2.zip` | 24.8 MB | TWRP 卡刷，解包设备当前 boot 只换 kernel，ramdisk 保留（推荐） |
+| `boot-stable4-droidspaces-v2.img` | 94.3 MB | fastboot 直刷，ramdisk 取自 ROM 包 `OS4.0.4.0`，系统版本不同请用 AK3 |
+
 ### 内核
 
 - 版本：`5.4.302-ikun-NekoMake-star-260929-qgqi+`

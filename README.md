@@ -8,17 +8,29 @@
 
 ---
 
-## 适用范围（请先读）
+## 支持设备
+
+上游源码（HoshinoNeko Stable4）覆盖四台骁龙 888 机型，本仓库提供 **star 的成品包**，其余机型按 [docs/BUILD.md](docs/BUILD.md) 用对应 defconfig 自行编译即可。
+
+| 设备 | 代号 | 译名 | 使用 defconfig | 本仓库成品包 |
+|---|---|---|---|---|
+| 小米 11 Ultra | `star` | 星级 | `star_defconfig` | 已提供 |
+| 小米 11 Pro | `mars` | 三月 | `star_defconfig`（与 star 共用） | 需自行编译 |
+| 小米 11 | `venus` | 金星 | `venus_defconfig` | 需自行编译 |
+| Redmi K40 Pro / Pro+ | `haydn` | — | `haydn_defconfig` | 需自行编译 |
+
+### 本仓库成品包的适用范围
 
 | 项目 | 要求 |
 |---|---|
-| 机型 | 小米 11 Ultra（`star` / M2102K1C）**仅此一台** |
+| 机型 | 小米 11 Ultra（`star` / M2102K1C） |
 | 系统 | 澎湃 OS 4.0 / Android 17，朗月移植包 `26.10.x`（`OS4.0.4.0.XPBCNXM`） |
 | 内核版本串 | `5.4.302-ikun-NekoMake-star-260929-qgqi+`（vermagic 必须一致） |
 | 刷入方式 | TWRP 卡刷 |
 
-**不适用**：11 Pro（mars）、11（venus）、K40 Pro（haydn）、官方澎湃、其他移植 ROM。
-vermagic 对不上会导致 vendor 模块拒载，表现为白屏 / 无 WiFi。换 ROM 必须改 `CONFIG_LOCALVERSION` 重编。
+**其他三台机型不能直接刷这个包**：它们的 ramdisk、DTB、vendor 模块都不同，且 `CONFIG_LOCALVERSION` 里的机型标识也不一样（`star` / `mars` / `venus` / `haydn`）。必须用对应 defconfig 重编，并把版本串改成目标 ROM 的 `uname -r`。
+
+同理，换成官方澎湃或其他移植 ROM 也要重编——vermagic 对不上会导致 vendor 模块拒载，表现为白屏 / 无 WiFi。
 
 ---
 
@@ -52,16 +64,30 @@ CPU 想限流请用 `taskset -c 0-3`（走 `sched_setaffinity`，不依赖 cgrou
 
 ## 刷入
 
-下载：**[AK3-Star-Stable4-Droidspaces-v2.zip](https://github.com/ruiRun0916/android_kernel_xiaomi_sm8350_miyume/releases/download/droidspaces-v2/AK3-Star-Stable4-Droidspaces-v2.zip)**
-（SHA256 `065b04489f72d07874cf2ea6aefe17024d465c494089c56be5aba2d83f11c8ae`）
+下载（Release 页面 `droidspaces-v2`）：
+
+- **推荐**：[AK3-Star-Stable4-Droidspaces-v2.zip](https://github.com/ruiRun0916/android_kernel_xiaomi_sm8350_miyume/releases/download/droidspaces-v2/AK3-Star-Stable4-Droidspaces-v2.zip)（24.8MB，TWRP 卡刷）
+  SHA256 `065b04489f72d07874cf2ea6aefe17024d465c494089c56be5aba2d83f11c8ae`
+- 备选：[boot-stable4-droidspaces-v2.img](https://github.com/ruiRun0916/android_kernel_xiaomi_sm8350_miyume/releases/download/droidspaces-v2/boot-stable4-droidspaces-v2.img)（fastboot 直刷）
+
+方式一（AK3 卡刷，ramdisk 保留）：
 
 ```
-1. TWRP 中刷入该 zip
-2. 重启，首次开机耐心等待
+1. TWRP 中刷入 AK3 zip
+2. 重启，首次开机耐心等待约 5~10 分钟
 3. 打开 Droidspaces -> 设置 -> 要求 -> 检查要求
 ```
 
-回滚：TWRP 重刷 ROM 包（不动 data 分区），或恢复备份的 boot。
+方式二（fastboot 直刷）：
+
+```bash
+fastboot flash boot boot-stable4-droidspaces-v2.img
+fastboot reboot
+```
+
+该镜像的 ramdisk 取自 ROM 安装包（`OS4.0.4.0`），**仅当你的系统也是这个版本时使用**；系统版本不同请走 AK3，或直接重编。
+
+回滚：TWRP 重刷 ROM 包（不动 data 分区），或 `fastboot flash boot` 刷回原厂 boot。
 
 ---
 
