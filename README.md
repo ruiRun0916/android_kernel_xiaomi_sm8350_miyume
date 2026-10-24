@@ -10,16 +10,18 @@
 
 ## 支持设备
 
-上游源码（HoshinoNeko Stable4）覆盖四台骁龙 888 机型，本仓库提供 **star 的成品包**，其余机型按 [docs/BUILD.md](docs/BUILD.md) 用对应 defconfig 自行编译即可。
+**只有一台：小米 11 Ultra（`star` / M2102K1C）。**
 
-| 设备 | 代号 | 译名 | 使用 defconfig | 本仓库成品包 |
-|---|---|---|---|---|
-| 小米 11 Ultra | `star` | 星级 | `star_defconfig` | 已提供 |
-| 小米 11 Pro | `mars` | 三月 | `star_defconfig`（与 star 共用） | 需自行编译 |
-| 小米 11 | `venus` | 金星 | `venus_defconfig` | 需自行编译 |
-| Redmi K40 Pro / Pro+ | `haydn` | — | `haydn_defconfig` | 需自行编译 |
+| 设备 | 代号 | 译名 | 本仓库支持情况 |
+|---|---|---|---|
+| **小米 11 Ultra** | `star` | 星级 | **支持**，提供成品刷机包 |
+| 小米 11 | `venus` | 金星 | 不支持 |
+| 小米 11 Pro | `mars` | 三月 | 不支持 |
+| Redmi K40 Pro / Pro+ | `haydn` | — | 不支持 |
 
-### 本仓库成品包的适用范围
+上游 HoshinoNeko 源码本身覆盖上面四台，但**本仓库只在 star 上验证过并出了成品包**。其余三台的 ramdisk、DTB、vendor 模块与 vermagic 机型标识都不同，未做任何测试，因此不列为支持机型。想自己试的话可以照 [docs/BUILD.md](docs/BUILD.md) 用对应 defconfig 编（`venus_defconfig` / `star_defconfig` / `haydn_defconfig`），风险自负。
+
+### 成品包适用范围
 
 | 项目 | 要求 |
 |---|---|
@@ -28,9 +30,7 @@
 | 内核版本串 | `5.4.302-ikun-NekoMake-star-260929-qgqi+`（vermagic 必须一致） |
 | 刷入方式 | TWRP 卡刷 |
 
-**其他三台机型不能直接刷这个包**：它们的 ramdisk、DTB、vendor 模块都不同，且 `CONFIG_LOCALVERSION` 里的机型标识也不一样（`star` / `mars` / `venus` / `haydn`）。必须用对应 defconfig 重编，并把版本串改成目标 ROM 的 `uname -r`。
-
-同理，换成官方澎湃或其他移植 ROM 也要重编——vermagic 对不上会导致 vendor 模块拒载，表现为白屏 / 无 WiFi。
+换成官方澎湃或其他移植 ROM 也要重编——vermagic 对不上会导致 vendor 模块拒载，表现为白屏 / 无 WiFi。
 
 ---
 

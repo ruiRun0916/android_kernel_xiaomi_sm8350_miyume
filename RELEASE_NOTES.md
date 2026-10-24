@@ -6,16 +6,16 @@
 
 ### 支持设备
 
-上游源码覆盖四台骁龙 888 机型，本 Release 提供 **star** 的成品：
+**仅小米 11 Ultra（`star` / M2102K1C）。**
 
-| 设备 | 代号 | 译名 | defconfig | 本 Release |
-|---|---|---|---|---|
-| 小米 11 Ultra | `star` | 星级 | `star_defconfig` | 已提供 |
-| 小米 11 Pro | `mars` | 三月 | `star_defconfig` | 需自行编译 |
-| 小米 11 | `venus` | 金星 | `venus_defconfig` | 需自行编译 |
-| Redmi K40 Pro / Pro+ | `haydn` | — | `haydn_defconfig` | 需自行编译 |
+| 设备 | 代号 | 译名 | 支持情况 |
+|---|---|---|---|
+| 小米 11 Ultra | `star` | 星级 | 支持，本 Release 提供成品 |
+| 小米 11 | `venus` | 金星 | 不支持 |
+| 小米 11 Pro | `mars` | 三月 | 不支持 |
+| Redmi K40 Pro / Pro+ | `haydn` | — | 不支持 |
 
-其他机型不可直接刷本包（ramdisk、DTB、vendor 模块与 vermagic 机型标识均不同），请按仓库 `docs/BUILD.md` 用对应 defconfig 重编。
+上游源码虽覆盖四台，但本 Release 只在 star 上验证过。其余三台的 ramdisk、DTB、vendor 模块与 vermagic 机型标识均不同，未测试，不作支持承诺；自行编译请参考仓库 `docs/BUILD.md`。
 
 ### 附件
 
