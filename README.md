@@ -52,8 +52,11 @@ CPU 想限流请用 `taskset -c 0-3`（走 `sched_setaffinity`，不依赖 cgrou
 
 ## 刷入
 
+下载：**[AK3-Star-Stable4-Droidspaces-v2.zip](https://github.com/ruiRun0916/android_kernel_xiaomi_sm8350_miyume/releases/download/droidspaces-v2/AK3-Star-Stable4-Droidspaces-v2.zip)**
+（SHA256 `065b04489f72d07874cf2ea6aefe17024d465c494089c56be5aba2d83f11c8ae`）
+
 ```
-1. TWRP 中刷入 artifacts/AK3-Star-Stable4-Droidspaces-v2.zip
+1. TWRP 中刷入该 zip
 2. 重启，首次开机耐心等待
 3. 打开 Droidspaces -> 设置 -> 要求 -> 检查要求
 ```
