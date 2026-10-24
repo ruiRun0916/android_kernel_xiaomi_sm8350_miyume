@@ -1,0 +1,19 @@
+# Docker 所需的额外 cgroup 控制器
+# 这些不在 Droidspaces 的必需项里，但跑 Docker 时会用到：
+#   CGROUP_PIDS            --pids-limit
+#   CGROUP_DEVICE          设备白名单
+#   CGROUP_PERF          perf_event 控制器
+#   CGROUP_NET_PRIO      net_prio 控制器
+#   BLK_DEV_THROTTLING   blkio 限速
+#   NET_CLS_CGROUP       网络分类
+#
+# 注意：CFS_BANDWIDTH（--cpus）在骁龙 WALT 内核上不可用，
+#       见 docs/PITFALLS.md 第 9 条，故此处不列。
+
+CONFIG_CGROUP_PIDS=y
+CONFIG_CGROUP_DEVICE=y
+CONFIG_CGROUP_PERF=y
+CONFIG_CGROUP_NET_PRIO=y
+CONFIG_BLK_DEV_THROTTLING=y
+CONFIG_NET_CLS_CGROUP=y
+CONFIG_NETPRIO_CGROUP=y
